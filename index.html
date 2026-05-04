@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dokumen - TOS Adventure Pacet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sistem Dokumen - TOS Adventure Pacet</title>
     
     <!-- SCRIPT PROTEKSI MAKSIMAL -->
     <script>
@@ -67,10 +67,11 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            padding: 20px;
         }
         .login-box {
             background: white;
-            padding: 40px;
+            padding: 40px 20px;
             border-radius: 8px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             width: 100%;
@@ -141,6 +142,7 @@
             color: var(--primary);
             transition: all 0.2s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            flex: 1;
         }
         .tab-btn:hover { background: var(--primary-light); }
         .tab-btn.active {
@@ -484,6 +486,68 @@
             font-size: 12px;
         }
 
+
+        /* ========================================= */
+        /* RESPONSIVE KHUSUS MOBILE / LAYAR KECIL */
+        /* ========================================= */
+        @media screen and (max-width: 768px) {
+            body { padding: 10px; }
+            .editor-panel, .invoice-container { padding: 20px; }
+            
+            /* Ubah Grid menjadi vertikal ke bawah */
+            .editor-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            
+            /* Override inline style grid untuk kotak custom pada pilihan opsi */
+            div[style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+            .paket-box-header { grid-template-columns: 1fr; }
+            .penawaran-grid { grid-template-columns: 1fr; }
+            
+            /* Penyesuaian Header Dokumen */
+            .invoice-header { flex-direction: column; align-items: center; text-align: center; gap: 15px; }
+            .invoice-title { text-align: center; }
+            
+            /* Penyesuaian Info Dokumen */
+            .invoice-meta { flex-direction: column; gap: 20px; }
+            .bill-to, .invoice-details { width: 100%; }
+            
+            /* Membuat Tabel bisa di-scroll khusus pada mobile */
+            .invoice-table, .item-editor table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                white-space: nowrap;
+            }
+
+            /* Penyesuaian Pembayaran & Ringkasan */
+            .invoice-summary-container { flex-direction: column; gap: 20px; }
+            .payment-info, .summary-totals { width: 100%; }
+            .payment-info { box-sizing: border-box; }
+            
+            /* Posisi Tanda Tangan */
+            .signature-area { justify-content: center; }
+            
+            /* Ukuran Stempel Watermark disesuaikan */
+            #paid-stamp {
+                font-size: 35px;
+                top: 30%;
+                right: 5%;
+                padding: 10px 20px;
+                border-width: 5px;
+            }
+            
+            /* Tombol cetak di mobile bisa dipisah agar mudah ditekan */
+            .item-editor > div { flex-direction: column; gap: 10px; }
+            .item-editor .btn { width: 100%; }
+        }
+
+
+        /* ========================================= */
+        /* SETINGAN KHUSUS SAAT DICETAK (PDF/PRINTER) */
+        /* ========================================= */
         @media print {
             body { background-color: white; padding: 0; }
             .tab-container, .editor-panel, .no-print, #login-screen { display: none !important; }
@@ -851,6 +915,7 @@ Di Tempat</strong><br><br>
                 paidStamp.style.display = "block";
                 paidStamp.innerText = tipeTagihan === 'dp' ? "DP DITERIMA" : "LUNAS";
                 paidStamp.style.fontSize = tipeTagihan === 'dp' ? "50px" : "65px"; 
+                // fix for mobile stamp scaling handled in CSS
             } else {
                 docTitle.innerText = "INVOICE";
                 docTitle.style.color = "var(--primary)"; 
