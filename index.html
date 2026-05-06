@@ -700,10 +700,6 @@ Di Tempat</strong><br><br>
                         <label>Nama Instansi / Klien</label>
                         <input type="text" id="run-client" value="PT. Nusantara Jaya" oninput="updateRundown()">
                     </div>
-                    <div class="form-group full-width">
-                        <label>Nama Penandatangan</label>
-                        <input type="text" id="run-sign-name" value="Muhammd Fatichul Ichsan ( fatik )" oninput="updateRundown()">
-                    </div>
                 </div>
 
                 <div class="item-editor">
@@ -750,15 +746,6 @@ Di Tempat</strong><br><br>
                     </thead>
                     <tbody id="out-rundown-body"></tbody>
                 </table>
-
-                <div class="signature-area">
-                    <div class="signature-box">
-                        Disetujui Oleh,<br>
-                        <strong>TOS Adventure Pacet</strong>
-                        <div class="signature-text">Fatik</div>
-                        <div class="signature-name" id="out-run-sign">Muhammd Fatichul Ichsan ( fatik )</div>
-                    </div>
-                </div>
 
                 <div class="invoice-footer">
                     <strong>TOS Adventure Pacet</strong> | Provider Rafting, Paintball, Outbound & Canyoning Terpercaya<br>
@@ -1022,7 +1009,6 @@ Di Tempat</strong><br><br>
             document.getElementById("out-run-title").innerText = document.getElementById("run-title").value;
             document.getElementById("out-run-date").innerText = document.getElementById("run-date").value;
             document.getElementById("out-run-client").innerText = document.getElementById("run-client").value;
-            document.getElementById("out-run-sign").innerText = document.getElementById("run-sign-name").value;
         }
 
         function updateRundownItem(index, key, value) { rundownItems[index][key] = value; renderRundownDoc(); }
